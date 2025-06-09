@@ -1,16 +1,15 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
-import type { LinksFunction } from 'react-router';
 import './tailwind.css';
 
 // Ts Reset
 import '@total-typescript/ts-reset';
 
-import toastStyles from 'react-toastify/dist/ReactToastify.min.css';
-import { ToastContainer } from 'react-toastify';
+// import toastStyles from 'react-toastify/dist/ReactToastify.min.css';
+// import { ToastContainer } from 'react-toastify';
 
-export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: toastStyles },
-];
+// export const links: LinksFunction = () => [
+//   { rel: 'stylesheet', href: toastStyles },
+// ];
 
 export default function App() {
   return (
@@ -24,7 +23,7 @@ export default function App() {
       <body>
         <Outlet />
         {/* My Globals components */}
-        <ToastContainer />
+        {/* <ToastContainer /> */}
 
         {/* Remix components */}
         <ScrollRestoration />
