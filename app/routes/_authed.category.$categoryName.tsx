@@ -10,8 +10,9 @@ import { parseForm, parseParams } from 'zodix';
 import { z } from 'zod';
 import { getUser } from '~/session.server';
 import { redirect } from 'react-router';
+import type { Route } from './+types/_authed.category.$categoryName';
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ params }: Route.LoaderArgs) {
   const { categoryName } = parseParams(params, {
     categoryName: z.string(),
   });
@@ -28,7 +29,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   return categoryFound;
 }
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function action({ request }: Route.ActionArgs) {
   const formData = await parseForm(request, {
     _action: z.string(),
     productId: z.string().optional(),
@@ -130,6 +131,7 @@ export const meta: MetaFunction = () => {
 
 export default function CategoryName() {
   const categoryFound = useLoaderData<typeof loader>();
+  console.log({ categoryFound });
   return (
     <>
       <h1 className="text-4xl font-black">{categoryFound?.name} 🦄🦄🦄🦄</h1>

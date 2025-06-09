@@ -7,16 +7,16 @@ import {
   isUserAuthenticated,
   login,
 } from '~/session.server';
-import type { ActionFunctionArgs, LoaderFunctionArgs } from 'react-router';
+import type { Route } from './+types/_unauthed.login._index';
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ request }: Route.LoaderArgs) {
   const isAuthenticated = await isUserAuthenticated(request);
   if (isAuthenticated) return redirect('/');
 
   return {};
 }
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function action({ request }: Route.ActionArgs) {
   const formData = await parseForm(request, {
     email: z.string().email(),
     password: z.string().min(5),

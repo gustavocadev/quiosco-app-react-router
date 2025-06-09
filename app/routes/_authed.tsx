@@ -1,11 +1,12 @@
-import { type LoaderFunctionArgs, redirect } from 'react-router';
+import { redirect } from 'react-router';
 import { Outlet, useLoaderData } from 'react-router';
 import { Sidebar, Steps } from '~/components/ui';
 import ModalCreateProduct from '~/components/ui/ModalCreateProduct';
 import { getUser, isUserAuthenticated } from '~/session.server';
 import { prisma } from '~/utils/db.server';
+import type { Route } from './+types/_authed.tsx';
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = async ({ request }: Route.LoaderArgs) => {
   // if the user is not authenticated, redirect to login
   const isAuthenticated = await isUserAuthenticated(request);
   if (!isAuthenticated) return redirect('/login');

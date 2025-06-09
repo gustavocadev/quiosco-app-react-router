@@ -1,8 +1,6 @@
 import { Form, useLoaderData, useNavigation } from 'react-router';
 import { redirect } from 'react-router';
 import type {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
   MetaFunction,
 } from 'react-router';
 import { getUser } from '~/session.server';
@@ -11,6 +9,7 @@ import { prisma } from '~/utils/db.server';
 import { parseForm } from 'zodix';
 import { z } from 'zod';
 import { useEffect } from 'react';
+import type { Route } from './+types/_authed.total';
 
 export const meta: MetaFunction = () => [
   {
@@ -19,7 +18,7 @@ export const meta: MetaFunction = () => [
   },
 ];
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ request }: Route.LoaderArgs) {
   const user = await getUser(request);
   if (!user) return redirect('/login');
 
@@ -40,7 +39,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   };
 }
 
-export const action = async ({ request }: ActionFunctionArgs) => {
+export const action = async ({ request }: Route.ActionArgs) => {
   const user = await getUser(request);
   if (!user) return redirect('/login');
 

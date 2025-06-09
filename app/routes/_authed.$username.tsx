@@ -1,6 +1,4 @@
 import {
-  type ActionFunctionArgs,
-  type LoaderFunctionArgs,
   redirect,
 } from 'react-router';
 import { Form, useLoaderData, useNavigation } from 'react-router';
@@ -10,8 +8,9 @@ import { getUser, isUserAuthenticated, logout } from '~/session.server';
 import { prisma } from '~/utils/db.server';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+import type { Route } from './+types/_authed.$username';
 
-export async function loader({ request, params }: LoaderFunctionArgs) {
+export async function loader({ request, params }: Route.LoaderArgs) {
   const isAuthenticated = await isUserAuthenticated(request);
   if (!isAuthenticated) return redirect('/login');
 
@@ -27,7 +26,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   };
 }
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function action({ request }: Route.ActionArgs) {
   const user = await getUser(request);
   if (!user) return redirect('/login');
   const formData = await parseForm(request, {

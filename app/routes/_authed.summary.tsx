@@ -1,11 +1,11 @@
 import {
-  type LoaderFunctionArgs,
   type MetaFunction,
   useLoaderData,
 } from 'react-router';
 import { ProductSummary } from '~/components/quiosco/ProductSummary';
 import { getUser } from '~/session.server';
 import { prisma } from '~/utils/db.server';
+import type { Route } from './+types/_authed.summary';
 
 export const meta: MetaFunction = () => [
   {
@@ -14,7 +14,7 @@ export const meta: MetaFunction = () => [
   },
 ];
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = async ({ request }: Route.LoaderArgs) => {
   const user = await getUser(request);
   if (!user) return null;
 

@@ -1,15 +1,14 @@
 import {
-  type ActionFunctionArgs,
   Form,
   Link,
-  type LoaderFunctionArgs,
 } from 'react-router';
 import { redirect } from 'react-router';
 import { isUserAuthenticated, signup } from '~/session.server';
 import { parseForm } from 'zodix';
 import { z } from 'zod';
+import type { Route } from './+types/_unauthed.signup._index';
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ request }: Route.LoaderArgs) {
   const isAuthenticated = await isUserAuthenticated(request);
   if (isAuthenticated) return redirect('/');
 
@@ -18,7 +17,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   };
 }
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function action({ request }: Route.ActionArgs) {
   const formData = await parseForm(request, {
     email: z.string().email(),
     password: z.string().min(5),
