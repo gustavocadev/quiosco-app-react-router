@@ -13,7 +13,6 @@
 	},
 	"dependencies": {
 		"@headlessui/react": "^1.7.13",
-		"@netlify/vite-plugin-react-router": "^1.0.1",
 		"@prisma/client": "^6.9.0",
 		"@react-router/fs-routes": "^7.6.2",
 		"@react-router/node": "^7.6.2",
@@ -38,6 +37,7 @@
 		"@types/react": "^18.0.33",
 		"@types/react-dom": "^18.0.11",
 		"@types/react-modal": "^3.13.1",
+		"@vercel/react-router": "^1.2.2",
 		"eslint": "^8.28.0",
 		"prisma": "^ 6.9.0",
 		"tailwindcss": "^4.0.14",
